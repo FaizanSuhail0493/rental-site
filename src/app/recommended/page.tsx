@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import sanityClient from "@sanity/client";
 import Image from "next/image";
 import { BsFuelPumpDiesel } from "react-icons/bs";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
@@ -10,11 +9,12 @@ import Link from "next/link";
 import { useCart } from "../../context/CartContext";
 import { useProductContext } from "../../context/ProductContext";
 import { FaShoppingCart } from "react-icons/fa";
+import { createClient } from '@sanity/client';
 
-const sanity = sanityClient({
-  projectId: "vs37xyyi",
-  dataset: "production",
-  apiVersion: "2021-08-31",
+const client = createClient({
+  projectId: 'vs37xyyi',
+  dataset: 'production',
+  apiVersion: '2021-08-31',
   useCdn: true,
 });
 
@@ -40,7 +40,7 @@ const Recommended: React.FC = () => {
                 "imageUrl": image.asset->url
             }`;
 
-      const data = await sanity.fetch(dataQuery);
+      const data = await client.fetch(dataQuery);
       const desiredIndices = [1, 2, 3, 6, 7, 8, 10, 11, 12, 13, 14, 15];
       const filteredCards = desiredIndices
         .map((index) => data[index])

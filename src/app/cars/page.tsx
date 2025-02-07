@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import sanityClient from "@sanity/client";
+// import sanityClient from "@sanity/client";
+import { createClient } from '@sanity/client';
 import Image from "next/image";
 import { BsFuelPumpDiesel } from "react-icons/bs";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
@@ -11,10 +12,17 @@ import { useCart } from "../../context/CartContext";
 import { useProductContext } from "../../context/ProductContext";
 import { FaShoppingCart } from "react-icons/fa";
 
-const sanity = sanityClient({
-  projectId: "vs37xyyi",
-  dataset: "production",
-  apiVersion: "2021-08-31",
+// const sanity = sanityClient({
+//   projectId: "vs37xyyi",
+//   dataset: "production",
+//   apiVersion: "2021-08-31",
+//   useCdn: true,
+// });
+
+const client = createClient({
+  projectId: 'vs37xyyi',
+  dataset: 'production',
+  apiVersion: '2021-08-31',
   useCdn: true,
 });
 
@@ -46,7 +54,7 @@ const ProductCard: React.FC = () => {
         "imageUrl": image.asset->url,
       }`;
 
-      const data = await sanity.fetch(query);
+      const data = await client.fetch(query);
 
       const specificIndices = [4, 5, 10, 9];
       const filteredProducts = specificIndices
