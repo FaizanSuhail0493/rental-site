@@ -1,11 +1,11 @@
-const {withSenttyConfig} = require('@sentry/nextjs');
+import { withSentryConfig } from "@sentry/nextjs";
 
 const moduleExports = {
-    // Your existing module.exports
+  // Your existing module.exports
 };
 
 const SentryWebpackPluginOptions = {
-    silent: true, // Suppresses all logs
+  silent: true, // Suppresses all logs
 };
 
-module.exports = withSentryConfig(moduleExports, SentryWebpackPluginOptions);
+export default withSentryConfig(moduleExports, SentryWebpackPluginOptions);

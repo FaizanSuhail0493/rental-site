@@ -3,7 +3,7 @@ import ReviewSection from '@/app/components/ReviewSection';
 import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+
 
 const ProductDetails = async ({ params: { id } }: { params: { id: string } }) => {
   const query = `*[_type == "car" && _id == $id]{

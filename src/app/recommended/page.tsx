@@ -18,6 +18,8 @@ const sanity = sanityClient({
   useCdn: true,
 });
 
+
+
 const Recommended: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [notification, setNotification] = useState<string | null>(null);

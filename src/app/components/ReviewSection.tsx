@@ -1,5 +1,6 @@
 
 'use client';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 
@@ -64,7 +65,7 @@ const ReviewSection = () => {
               key={index}
               className="bg-white p-3 border border-gray-200 rounded-lg shadow-sm mb-4 flex items-start gap-4"
             >
-              <img
+              <Image
                 src={comment.profile}
                 alt={comment.name}
                 className="w-12 h-12 rounded-full"

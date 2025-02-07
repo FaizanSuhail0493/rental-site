@@ -11,23 +11,28 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 const Cart: React.FC = () => {
   const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
   const [notification, setNotification] = useState<string | null>(null);
-
-  // Initialize filters with default values
-  const defaultFilters = {
+  const [filters, setFilters] = useState({
     pickUpDate: '',
     dropOffDate: '',
     pickUpCity: '',
     dropOffCity: '',
     pickUpTime: '',
     dropOffTime: '',
-  };
-
-  const [filters, setFilters] = useState(defaultFilters);
+  });
   const [rentalDays, setRentalDays] = useState(1);
 
   // Load filters from localStorage when the component mounts
   useEffect(() => {
     const savedFilters = localStorage.getItem('rentalFilters');
+    const defaultFilters = { // Defined inside useEffect
+      pickUpDate: '',
+      dropOffDate: '',
+      pickUpCity: '',
+      dropOffCity: '',
+      pickUpTime: '',
+      dropOffTime: '',
+    };
+
     if (savedFilters) {
       try {
         const parsedFilters = JSON.parse(savedFilters);
@@ -36,8 +41,10 @@ const Cart: React.FC = () => {
         console.error("Error parsing filters from localStorage:", error);
         setFilters(defaultFilters);
       }
+    } else {
+      setFilters(defaultFilters);
     }
-  }, []);
+  }, []); // No dependency issue
 
   // Save filters to localStorage when they change
   useEffect(() => {
